@@ -1,0 +1,32 @@
+.container {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.item_in_cart_img {
+  width: 100px;
+  height: 100px;
+}
+
+.h4_btns {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.add_minus_btns {
+  display: flex;
+  gap: 1rem;
+}
+
+.add_minus_btns button {
+  border: 1px solid var(--shadow-item);
+  border-radius: 0.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2rem;
+}
