@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Bell, Cart, Person } from "react-bootstrap-icons";
 import style from "./Header.module.css";
+import { useLoaderData } from "react-router-dom";
 
-function Header() {
+function Header({toggleOverlay}) {
+ // const {numberOfItems} = useLoaderData();
+
   return (
     <div>
       <header className={style.home_header_fixed}>
@@ -16,9 +19,14 @@ function Header() {
               </button>
             </li>
             <li>
-              <button className={style.cart_btn}>
+              <button 
+              onClick={() =>{
+                localStorage.setItem('overlay_state','open');
+                toggleOverlay();
+              }}
+              className={style.cart_btn}>
                 {<Cart />}
-                <span>10</span>
+                <span>{0}</span>
               </button>
             </li>
             <li>

@@ -3,9 +3,3 @@
   height: 100%;
 }
 
-.item_list {
-  display: flex;
-  flex-flow: wrap;
-  justify-content: center;
-  padding: 5rem 1rem 0 1rem;
-}

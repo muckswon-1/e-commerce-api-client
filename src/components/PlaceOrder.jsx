@@ -1,7 +1,9 @@
 import React from 'react'
 import style from './PlaceOrder.module.css';
+import { useLoaderData } from 'react-router-dom';
 
 function PlaceOrder() {
+    const {numberOfItems, itemsTotal} = useLoaderData();
   return (
     <div className={style.placeorder_container}>
             
@@ -11,8 +13,8 @@ function PlaceOrder() {
                 </thead>
                 <tbody>
                     <tr>
-                       <td>Items (3)</td> 
-                       <td>KSH 500</td>
+                       <td>Items ({numberOfItems})</td> 
+                       <td>KSH {itemsTotal}</td>
                     </tr>
                     <tr>
                         <td>Shipping and handling</td>
@@ -24,7 +26,7 @@ function PlaceOrder() {
                     </tr>
                     <tr>
                         <td>Order total</td>
-                        <td> KSH 700</td>
+                        <td> KSH 1900</td>
                     </tr>
                 </tbody>
             </table>
