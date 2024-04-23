@@ -1,54 +1,56 @@
-const SERVER_URL = 'http://localhost:2070'
-import axios from 'axios';
-
-//fetch all items
-export const getAllProducts =  async () =>  {
-
-    try {
-        const response = await axios.get(`${SERVER_URL}/products`)
-        return response.data;
-
-    } catch (error) {
-        console.error(error)
-        throw new Error('An error occured while fetching items');
-    }
-}
-
-//get product by Id;
-
-export const getProductById = async (productId) => {
-   try {
-    const products = await getAllProducts();
-    const product  = products.filter(aProduct => aProduct.id === productId)[0];
-    return product;
-
-   } catch (error) {
-    console.error(error);
-    throw new Error('An error occured while attempting to get product by id')
-   }
-
-}
+export const SERVER_URL = "http://localhost:2070";
 
 //get subtotal
-export const subtotal =  async (item) => {
-    const itemInProducts = await getProductById(item.product_id);
-    const itemPrice = itemInProducts.unit_price;
-    const total = itemPrice * item.quantity;
-    return total;
-}
-
-export const allItemsTotal = async (items) => {
-    let total = 0;
-    const promises = items.map(async (item) => {
-        console.log(item);
-        return await subtotal(item);
-    });
-    const subtotals = await Promise.all(promises);
-    total = subtotals.reduce((acc, subtotal) => acc + subtotal, 0);
-    console.log(total);
-    return total;
+export const subtotal = (item, products) => {
+  console.log(products);
+  try {
+    if (products) {
+      const itemInProducts = products.filter(
+        (product) => product.id === item.product_id,
+      )[0];
+      const itemPrice = itemInProducts.unit_price;
+      const total = itemPrice * item.quantity;
+      return total;
+    } else {
+      throw new Error("Products is undefined");
+    }
+  } catch (error) {
+    console.error("Error calculating subtotal", error.stack);
+    return false;
+  }
 };
 
+export const allItemsTotal = (items, products) => {
+  let total = 0;
+  console.log(products);
+  if (items && products) {
+    items.forEach((item) => {
+      total += subtotal(item, products);
+    });
+    return total;
+  }
 
+  // const prom = items.map(async (item) => {
 
+  //     return  subtotal(item);
+  // });
+  // const subtotals = await Promise.all(promises);
+  // total = subtotals.reduce((acc, subtotal) => acc + subtotal, 0);
+  return false;
+};
 
+//count items in shopping cart
+
+export const itemCount = (items) => {
+  try {
+    let total = 0;
+    items.forEach((item) => {
+      total += item.quantity;
+    });
+    return total;
+  } catch (error) {
+    console.error(error);
+    console.log("An error occured while counting items");
+    return 0;
+  }
+};

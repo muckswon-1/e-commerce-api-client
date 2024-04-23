@@ -10,6 +10,11 @@
   justify-content: space-between;
 }
 
+.header_link {
+  text-decoration: none;
+  color: var(--light-mode-text);
+}
+
 .cart_icon {
   font-size: 1.2rem;
 }
@@ -59,6 +64,21 @@
   background-color: initial;
   border: 1px solid var(--component-background);
   color: var(--component-background);
+}
+
+.logout_btn {
+  background-color: var(--red-danger);
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  color: var(--light-mode-background);
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.logout_btn:hover {
+  background-color: initial;
+  border: 1px solid var(--red-danger);
+  color: var(--red-danger);
 }
 
 .avatar {

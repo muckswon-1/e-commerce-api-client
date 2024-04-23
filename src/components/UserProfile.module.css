@@ -1,0 +1,14 @@
+.container {
+  margin-top: 2rem;
+  width: 50%;
+}
+
+.infoContainer h2 {
+  margin-bottom: 1rem;
+}
+
+.infoContainer p {
+  width: 50%;
+  display: flex;
+  gap: 1rem;
+}

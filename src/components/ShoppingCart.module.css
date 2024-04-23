@@ -1,5 +1,6 @@
 .cart_container {
-  width: 100%;
+  margin-top: 2rem;
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,4 +40,11 @@
 
 .proceed_checkout:hover {
   background-color: var(--button-hover);
+}
+
+.link_btn {
+  text-decoration: underline;
+  margin-right: 1rem;
+  font-size: 1.2rem;
+  color: blue;
 }

@@ -1,22 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ChevronLeft } from "react-bootstrap-icons";
 import ShippingAdddressForm from "./ShippingAdddressForm";
-import style from './Checkout.module.css';
+import style from "./Checkout.module.css";
 import MpesaForm from "./MpesaForm";
 import PlaceOrder from "./PlaceOrder";
-import { getItemsInShoppingCart, itemCount } from "../utils/cart";
-import { allItemsTotal } from "../utils/utils";
+import { getItemsInShoppingCart } from "../utils/cart/cart";
+import { allItemsTotal, itemCount } from "../utils/utils";
 import { useNavigate } from "react-router-dom";
-
-export async function loader() {
-  const numberOfItems = await itemCount();
-  const itemsInCart = await getItemsInShoppingCart();
-  const itemsTotal = await allItemsTotal(itemsInCart);
-  return {numberOfItems,itemsTotal}
-}
+import { useSelector } from "react-redux";
+import { selectCartItems } from "../app/features/shoppingCart/shoppingCartSlice";
 
 function Checkout() {
   const navigate = useNavigate();
+
   return (
     <div className={style.checkout_container}>
       <header className={style.checkout_header}>

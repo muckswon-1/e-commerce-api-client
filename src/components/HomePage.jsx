@@ -6,31 +6,40 @@ import Header from "./Header";
 import Overlay from "./Overlay";
 import { Outlet, useLoaderData, useNavigate } from "react-router-dom";
 import ItemList from "./ItemList";
-import { getAllProducts} from "../utils/utils";
-import { getItemsInShoppingCart, itemCount } from "../utils/cart";
 
-export async function loader(){
-  const products = await getAllProducts();
-  const shoppingCartItems = await getItemsInShoppingCart();
-  const numberOfItems = await  itemCount();
-  return {products, shoppingCartItems, numberOfItems}
-}
-
-
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchAllItems,
+  selectAllItems,
+} from "../app/features/items/itemsSlice";
+import { fetchCart } from "../app/features/shoppingCart/shoppingCartSlice";
+import { selectUser } from "../app/features/users/userSlice";
 
 function HomePage() {
-  
- 
-  const {products} = useLoaderData();
-  const {shoppingCartItems} = useLoaderData();
+  const products = useSelector(selectAllItems);
+  const dispatch = useDispatch();
+  const itemStatus = useSelector((state) => state.items.status);
+  const cartItemStatus = useSelector((state) => state.cart.status);
+  const currentUser = useSelector(selectUser);
+  //const shoppingCartItems = []
 
+  useEffect(() => {
+    if (itemStatus === "idle") {
+      dispatch(fetchAllItems());
+    }
+  }, [itemStatus, dispatch]);
 
-
+  // useEffect(() => {
+  //   if(cartItemStatus === 'idle'){
+  //     dispatch(fetchCart())
+  //     dispatch(cartItemsCount());
+  //   }
+  // });
 
   return (
     <div className={style.home}>
-      <ItemList products={products} setShouldRefetch={setShouldRefetch} />
-      {showOverlay && <Overlay component={ShoppingCart} componentProps={{toggleOverlay: toggleOverlay, shoppingCartItems: shoppingCartItems, setShouldRefetch: setShouldRefetch}} />}
+      <ItemList products={products} />
+      {/*showOverlay && <Overlay component={ShoppingCart} componentProps={{toggleOverlay: toggleOverlay, shoppingCartItems: shoppingCartItems, setShouldRefetch: setShouldRefetch}} />*/}
     </div>
   );
 }

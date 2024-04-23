@@ -1,0 +1,29 @@
+.container {
+  margin-top: 2rem;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.container form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.container form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.registerBtn {
+  background-color: var(--component-background);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: var(--light-mode-background);
+  font-size: 1.2rem;
+  display: flex;
+  align-self: flex-end;
+}
